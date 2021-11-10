@@ -22,7 +22,11 @@ public class Enemy : MonoBehaviour
     GameObject[] newObject = new GameObject[50];
     int n = 0;
 
+<<<<<<< HEAD
     // Enemy Health
+=======
+    // health
+>>>>>>> Branch1
     int health = 25;
 
     //[SerializeField] GameObject pickupHolder;
@@ -75,6 +79,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
+=======
+    public void ReduceHealth() 
+    {
+        health--;
+    }
+
+>>>>>>> Branch1
     void move(float speed)
     {
         GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * speed);
@@ -91,11 +103,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
     public void ReduceHealth() 
     {
         health--;
     }
 
+=======
+>>>>>>> Branch1
     private void FixedUpdate()
     {
         //float angle = Vector3.Angle(target.transform.position - transform.position, transform.forward);

@@ -25,8 +25,8 @@ public class Bullet : MonoBehaviour
     {
         //if (collision.gameObject.CompareTag("Enemy")) 
         //{
-        //    collision.gameObject.GetComponent<Enemy>().ReduceHealth();
-        //    //Destroy(collision.gameObject);
+        //    collision.gameObject.GetComponent<Enemy>().DropItem();
+        //    Destroy(collision.gameObject);
         //}
 
         //Destroy(gameObject);
@@ -37,9 +37,9 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyBody"))
         {
             other.gameObject.transform.parent.GetComponent<Enemy>().ReduceHealth();
-            //Destroy(collision.gameObject);
-            Destroy(gameObject);
+            //Destroy(other.gameObject.transform.parent.gameObject);
         }
-        
+
+        Destroy(gameObject,1f);
     }
 }
