@@ -19,7 +19,7 @@ public class DropItem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            PlayerController.resource += 100;
+            PlayerController.resource += 1000;
             Debug.Log("Resource: " + PlayerController.resource);
             Destroy(gameObject);
         }

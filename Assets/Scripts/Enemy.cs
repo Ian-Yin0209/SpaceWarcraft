@@ -22,6 +22,9 @@ public class Enemy : MonoBehaviour
     GameObject[] newObject = new GameObject[50];
     int n = 0;
 
+    // health
+    int health = 25;
+
     //[SerializeField] GameObject pickupHolder;
 
     // Start is called before the first frame update
@@ -33,6 +36,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (health <= 0) 
+        {
+            DropItem();
+            Destroy(gameObject);
+        }
+
         timeToShoot -= Time.deltaTime;
 
         if (target != null)
@@ -66,6 +75,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void ReduceHealth() 
+    {
+        health--;
+    }
+
     void move(float speed)
     {
         GetComponent<Rigidbody>().MovePosition(transform.position + transform.forward * Time.fixedDeltaTime * speed);
@@ -73,10 +87,13 @@ public class Enemy : MonoBehaviour
 
     void turn(float speed)
     {
-        Vector3 dir = target.transform.position - transform.position;
-        dir.y = 0;
-        Quaternion q = Quaternion.LookRotation(dir);
-        transform.rotation = Quaternion.Slerp(transform.rotation, q, speed);
+        if (target != null) 
+        {
+            Vector3 dir = target.transform.position - transform.position;
+            dir.y = 0;
+            Quaternion q = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, speed);
+        }
     }
 
     private void FixedUpdate()

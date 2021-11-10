@@ -76,10 +76,10 @@ public class GunTower : MonoBehaviour
             transform.Rotate(transform.up * 60f * Time.fixedDeltaTime);
             RaycastHit hit;
             Physics.Raycast(transform.position, transform.forward, out hit);
-            if (hit.distance < 10 && hit.collider != null && hit.collider.gameObject.CompareTag("EnemyBody"))
+            if (hit.distance < 5 && hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
             {
                 lockedEnemy = hit.collider.gameObject;
-                Debug.Log("Lock: " + hit.collider.gameObject);
+                Debug.Log("Lock: " + hit.collider.gameObject + ": " + hit.distance);
                 line.material.color = Color.red;
             }
         }
