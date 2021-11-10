@@ -2,28 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class PlayerHealth : MonoBehaviour
 {
-    public GameObject enemy;
-    int count;
-
-    // New
-    public GameObject[] enemyPools;
+    [SerializeField] int health;
 
     // Start is called before the first frame update
     void Start()
     {
-        count = 0;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (count == 0)
+        if (health <= 0) 
         {
-            Instantiate(enemy);
-            count = 500;
+            Destroy(this.gameObject);
         }
-        count--;
+    }
+
+    public void ReduceHealth() 
+    {
+        health--;
+        Debug.Log(health);
     }
 }

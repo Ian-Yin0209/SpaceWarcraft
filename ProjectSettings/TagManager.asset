@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Ground
   - GunTower
+  - EnemyBody
   layers:
   - Default
   - TransparentFX

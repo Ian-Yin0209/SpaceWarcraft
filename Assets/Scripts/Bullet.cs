@@ -23,13 +23,12 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")){
-
-            //PlayerController.enemyKills += 1;
+        if (collision.gameObject.CompareTag("Enemy")) 
+        {
             collision.gameObject.GetComponent<Enemy>().DropItem();
             Destroy(collision.gameObject);
-            
         }
+
         Destroy(gameObject);
     }
 }

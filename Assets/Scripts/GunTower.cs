@@ -9,6 +9,10 @@ public class GunTower : MonoBehaviour
     public GameObject bullet;
     int coolDown;
     public float buildingProgress = 0.0f;
+
+    // New - Tower health
+    [SerializeField] int towerHealth;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,10 +47,20 @@ public class GunTower : MonoBehaviour
         return buildingProgress >= 1.0f;
     }
 
+    public void ReduceHealth() 
+    {
+        towerHealth--;
+    }
+
     // Update is called once per frame
     void Update()
     {
         RefreshLine();
+
+        if (towerHealth <= 0) 
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -62,7 +76,7 @@ public class GunTower : MonoBehaviour
             transform.Rotate(transform.up * 60f * Time.fixedDeltaTime);
             RaycastHit hit;
             Physics.Raycast(transform.position, transform.forward, out hit);
-            if (hit.distance < 10 && hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
+            if (hit.distance < 10 && hit.collider != null && hit.collider.gameObject.CompareTag("EnemyBody"))
             {
                 lockedEnemy = hit.collider.gameObject;
                 Debug.Log("Lock: " + hit.collider.gameObject);
