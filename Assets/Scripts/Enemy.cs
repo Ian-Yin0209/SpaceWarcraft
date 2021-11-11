@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     // New Enemy Attack
     [SerializeField] bool isPlayerInRadius = false;
     [SerializeField] bool isGunTowerInRadius = false;
+    [SerializeField] bool provoked = false;
     [SerializeField] GameObject enemyBullet;
     [SerializeField] Transform bulletPoint;
     float timeToShoot = 0.3f;
@@ -46,6 +47,11 @@ public class Enemy : MonoBehaviour
 
         if (target != null && agent != null)
             agent.SetDestination(target.transform.position);
+
+        if (provoked) 
+        {
+            target = player;
+        }
 
         if (isPlayerInRadius)
         {
@@ -122,6 +128,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Bullet")) 
+        {
+            provoked = true;
+        }
+
         if (other.gameObject.CompareTag("Player")) 
         {
             isPlayerInRadius = true;
@@ -140,11 +151,13 @@ public class Enemy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isPlayerInRadius = false;
+            provoked = false;
         }
 
         if (other.gameObject.CompareTag("GunTower"))
         {
             isGunTowerInRadius = false;
+            provoked = false;
         }
     }
 
