@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         var buildAction = GetComponent<PlayerInput>().actions["Build"];
             buildAction.performed += content =>
