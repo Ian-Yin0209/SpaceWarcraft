@@ -9,6 +9,8 @@ TagManager:
   - Ground
   - GunTower
   - EnemyBody
+  - ShipPart
+  - BaseDoor
   layers:
   - Default
   - TransparentFX

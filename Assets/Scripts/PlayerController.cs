@@ -40,11 +40,23 @@ public class PlayerController : MonoBehaviour
     bool doublePressed = false;
     float rollSpeed = 1500f;
 
-
+    // For win - prototype (temp)
+    [SerializeField] bool collectedAllParts = false;
+    [SerializeField] int n = 0;
+    [SerializeField] bool playerInBase;
+    [SerializeField] GameObject winText;
+    [SerializeField] GameObject loseText;
 
     // Start is called before the first frame update
     void Start()
     {
+        // win lose
+        winText.SetActive(false);
+        loseText.SetActive(false);
+        ScoreText.setPartsText(n);
+
+        playerInBase = true;
+
         // New
         keyboard = InputSystem.GetDevice<Keyboard>();
 
@@ -102,6 +114,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // for win condition
+        if (n >= 5) 
+        {
+            collectedAllParts = true;
+        }
+
+        if (collectedAllParts && playerInBase) 
+        {
+            winText.SetActive(true);
+            gameOverCam.gameObject.SetActive(true);
+        }
+
         // Player health
         ScoreText.setPlayerHealthText(GetComponent<PlayerHealth>().GetPlayerHealth());
 
@@ -192,8 +216,11 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (gameOverCam != null)
+        if (gameOverCam != null) 
+        {
+            loseText.SetActive(true);
             gameOverCam.gameObject.SetActive(true);
+        }
     }
 
     private void build()
@@ -210,6 +237,29 @@ public class PlayerController : MonoBehaviour
         else
         {
             buildBarIns.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("ShipPart")) 
+        {
+            n++;
+            ScoreText.setPartsText(n);
+            Destroy(other.gameObject);
+        }
+
+        if (other.gameObject.CompareTag("BaseDoor")) 
+        {
+            playerInBase = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("BaseDoor")) 
+        {
+            playerInBase = false;
         }
     }
 }

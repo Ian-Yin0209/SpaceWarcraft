@@ -12,10 +12,14 @@ public class ScoreText : MonoBehaviour
     public Text playerHealth;
     static Text playerHealthIns;
 
+    public Text partsText;
+    static Text partsTextIns;
+
     private void Awake()
     {
         scoreTextIns = scoreText;
         playerHealthIns = playerHealth;
+        partsTextIns = partsText;
     }
     public static void setText(int score)
     {
@@ -25,6 +29,11 @@ public class ScoreText : MonoBehaviour
     public static void setPlayerHealthText(int num) 
     {
         playerHealthIns.text = "Health: " + num;
+    }
+
+    public static void setPartsText(int num)
+    {
+        partsTextIns.text = "Parts: " + num;
     }
 
     // Start is called before the first frame update
