@@ -76,7 +76,7 @@ public class GunTower : MonoBehaviour
             transform.Rotate(transform.up * 60f * Time.fixedDeltaTime);
             RaycastHit hit;
             Physics.Raycast(transform.position, transform.forward, out hit);
-            if (hit.distance < 5 && hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
+            if ((hit.distance > 0 && hit.distance < 10) && hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
             {
                 lockedEnemy = hit.collider.gameObject;
                 Debug.Log("Lock: " + hit.collider.gameObject + ": " + hit.distance);
