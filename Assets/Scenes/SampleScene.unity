@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 117225162}
   - component: {fileID: 117225163}
   m_Layer: 7
-  m_Name: w
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   gunTower: {fileID: 7788935553831189646, guid: 75d7e773e0a25ec419865e831e207bf9, type: 3}
   buildBar: {fileID: 1225626850423865457, guid: 721b1ab94084a7f4a9fd62f468aa5186, type: 3}
   bulletSpawnPoint: {fileID: 2004241363}
-  jumpHeight: 10
+  jumpHeight: 5
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -423,12 +423,12 @@ GameObject:
   - component: {fileID: 180006190}
   - component: {fileID: 180006189}
   - component: {fileID: 180006188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &180006187
 Transform:
@@ -664,12 +664,12 @@ GameObject:
   - component: {fileID: 219555853}
   - component: {fileID: 219555852}
   - component: {fileID: 219555851}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &219555850
 Transform:
@@ -760,12 +760,12 @@ GameObject:
   - component: {fileID: 239528713}
   - component: {fileID: 239528712}
   - component: {fileID: 239528711}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &239528710
 Transform:
@@ -853,12 +853,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 258178775}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &258178775
 Transform:
@@ -894,12 +894,12 @@ GameObject:
   - component: {fileID: 292329958}
   - component: {fileID: 292329957}
   - component: {fileID: 292329956}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &292329955
 Transform:
@@ -1524,12 +1524,12 @@ GameObject:
   - component: {fileID: 629915119}
   - component: {fileID: 629915118}
   - component: {fileID: 629915117}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &629915116
 Transform:
@@ -1954,12 +1954,12 @@ GameObject:
   - component: {fileID: 825100796}
   - component: {fileID: 825100795}
   - component: {fileID: 825100794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &825100793
 Transform:
@@ -2257,9 +2257,9 @@ GameObject:
   - component: {fileID: 952912157}
   - component: {fileID: 952912156}
   - component: {fileID: 952912155}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -2454,10 +2454,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1537045740}
     m_Modifications:
-    - target: {fileID: 7375445016396520306, guid: 4d8b580714168af4dafa31ca4169c3a0, type: 3}
-      propertyPath: pickupHolder
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7375445016396520316, guid: 4d8b580714168af4dafa31ca4169c3a0, type: 3}
       propertyPath: m_Name
       value: NewEnemy (3)
@@ -2981,7 +2977,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1138423563
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4043,12 +4039,12 @@ GameObject:
   - component: {fileID: 1482778695}
   - component: {fileID: 1482778694}
   - component: {fileID: 1482778693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1482778692
 Transform:
@@ -4230,12 +4226,12 @@ GameObject:
   - component: {fileID: 1542724181}
   - component: {fileID: 1542724180}
   - component: {fileID: 1542724179}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1542724178
 Transform:
@@ -5397,10 +5393,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1537045740}
     m_Modifications:
-    - target: {fileID: 7375445016396520306, guid: 4d8b580714168af4dafa31ca4169c3a0, type: 3}
-      propertyPath: pickupHolder
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 7375445016396520316, guid: 4d8b580714168af4dafa31ca4169c3a0, type: 3}
       propertyPath: m_Name
       value: NewEnemy (2)

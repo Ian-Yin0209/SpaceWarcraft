@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     int n = 0;
 
     // health
-    int health = 25;
+    int health = 5;
 
     //[SerializeField] GameObject pickupHolder;
 
