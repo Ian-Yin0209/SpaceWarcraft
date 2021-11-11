@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
         // win lose
         winText.SetActive(false);
         loseText.SetActive(false);
+        ScoreText.setPartsText(n);
 
         playerInBase = true;
 
@@ -244,6 +245,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("ShipPart")) 
         {
             n++;
+            ScoreText.setPartsText(n);
             Destroy(other.gameObject);
         }
 
