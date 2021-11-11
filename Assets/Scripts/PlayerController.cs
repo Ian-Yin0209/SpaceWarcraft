@@ -19,10 +19,12 @@ public class PlayerController : MonoBehaviour
     GameObject buildBarIns = null;
     GunTower buildingGunTower = null;
 
-    // -----------New-------------
+    // Keyboard device
     Keyboard keyboard;
 
+    // Spawn point for bullet
     public GameObject bulletSpawnPoint;
+
     //public static int enemyKills;
     // For Jump
     [SerializeField] float jumpHeight = 5.0f;
@@ -31,14 +33,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float checkRadius = 0.5f;
     [SerializeField] Transform groundCheck;
     Vector3 downForce;
-    bool jump;
     bool isGrounded;
 
     // For Roll or Evade
     float doublePressTime;
     float requiredTime = 0.5f;
     bool doublePressed = false;
-    float rollSpeed = 1500f;
+    //float rollSpeed = 1500f;
 
     // For win - prototype (temp)
     [SerializeField] bool collectedAllParts = false;
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveDirection = transform.forward * mov_val.y + transform.right * mov_val.x;
         characterController.SimpleMove(moveDirection * speed * Time.fixedDeltaTime);
-        Roll(moveDirection);
+        //Roll(moveDirection);
         playerPosition = transform.position;
         build();
     }
@@ -166,6 +167,7 @@ public class PlayerController : MonoBehaviour
         //ScoreText.setEnemyText(enemyKills);
     }
 
+    // Unfinished
     void Roll(Vector3 dir) 
     {
         if (keyboard.aKey.wasPressedThisFrame) 
