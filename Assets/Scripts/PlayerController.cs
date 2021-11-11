@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
         characterController = GetComponent<CharacterController>();
         buildBarIns = Instantiate(buildBar);
-        buildBarIns.transform.parent = null;
+        buildBarIns.transform.SetParent(null, false);
         buildBarIns.SetActive(false);
     }
 
@@ -76,6 +76,14 @@ public class PlayerController : MonoBehaviour
                     }
                     if (hit.collider.gameObject.CompareTag("Ground") && resource >= 300)
                     {
+                        var gts = GameObject.FindGameObjectsWithTag("GunTower");
+                        foreach (var gt in gts){
+                            print("Mag: " + (gt.transform.position - hit.point).magnitude.ToString());
+                            if ((gt.transform.position - hit.point).magnitude < 2)
+                            {
+                                return;
+                            }
+                        }
                         resource -= 300;
                         var raycastPos = hit.point;
                         var obj = Instantiate(gunTower, hit.point + new Vector3(0f, 1f, 0f), Quaternion.Euler(0, 0, 0));
@@ -159,7 +167,7 @@ public class PlayerController : MonoBehaviour
     private void OnLook(InputValue value)
     {
         Vector2 lookValue = value.Get<Vector2>();
-        _rotation.x += -lookValue.y * 0.022f * _sensitivity;
+        _rotation.x += -lookValue.y * 0.03f * _sensitivity;
         if (_rotation.x > 90)
         {
             _rotation.x = 90;
@@ -168,7 +176,7 @@ public class PlayerController : MonoBehaviour
         {
             _rotation.x = -90;
         }
-        _rotation.y += lookValue.x * 0.022f * _sensitivity;
+        _rotation.y += lookValue.x * 0.03f * _sensitivity;
     }
     private void OnFire(InputValue value)
     {
