@@ -102,6 +102,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Player health
+        ScoreText.setPlayerHealthText(GetComponent<PlayerHealth>().GetPlayerHealth());
+
         // New - Jump and Run
         isGrounded = Physics.CheckSphere(groundCheck.position, checkRadius, groundMask);
 

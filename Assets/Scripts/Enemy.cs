@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     int n = 0;
 
     // Enemy Health
-    int health = 25;
+    int health = 5;
 
     //[SerializeField] GameObject pickupHolder;
 
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
 
         timeToShoot -= Time.deltaTime;
 
-        if (target != null)
+        if (target != null && agent != null)
             agent.SetDestination(target.transform.position);
 
         if (isPlayerInRadius)

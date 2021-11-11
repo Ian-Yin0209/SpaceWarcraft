@@ -9,22 +9,22 @@ public class ScoreText : MonoBehaviour
     public Text scoreText;
     static Text scoreTextIns;
 
-    //public Text enemyText;
-    //static Text enemyTextIns;
+    public Text playerHealth;
+    static Text playerHealthIns;
 
     private void Awake()
     {
         scoreTextIns = scoreText;
-        //enemyTextIns = enemyText;
+        playerHealthIns = playerHealth;
     }
     public static void setText(int score)
     {
-        scoreTextIns.text = "Score: " + score;
+        scoreTextIns.text = "Resource: " + score;
     }
 
-    public static void setEnemyText(int enemy)
+    public static void setPlayerHealthText(int num) 
     {
-        //enemyTextIns.text = "Enemy: " + enemy;
+        playerHealthIns.text = "Health: " + num;
     }
 
     // Start is called before the first frame update
