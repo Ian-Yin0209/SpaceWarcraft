@@ -43,16 +43,19 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
 
+        // timer
         timeToShoot -= Time.deltaTime;
 
         if (target != null && agent != null)
             agent.SetDestination(target.transform.position);
 
+        // When enemy provoked from player bullets
         if (provoked) 
         {
             target = player;
         }
 
+        // Attack player
         if (isPlayerInRadius)
         {
             target = player;
@@ -63,6 +66,7 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        // Attack tower
         else if (isGunTowerInRadius && !isPlayerInRadius)
         {
             foreach (GameObject gameObject in newObject)

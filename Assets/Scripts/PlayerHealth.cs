@@ -24,7 +24,7 @@ public class PlayerHealth : MonoBehaviour
     public void ReduceHealth() 
     {
         health--;
-        Debug.Log(health);
+        //Debug.Log(health);
     }
 
     public int GetPlayerHealth() 
