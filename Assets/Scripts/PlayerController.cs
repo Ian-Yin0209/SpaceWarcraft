@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     public GameObject buildBar;
     GameObject buildBarIns = null;
     GunTower buildingGunTower = null;
+    private bool firePressed = false;
+    private int fireCooldown = 0;
+    [SerializeField] private int fireCooldownMax = 15;
 
     // Keyboard device
     Keyboard keyboard;
@@ -72,43 +75,46 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         var buildAction = GetComponent<PlayerInput>().actions["Build"];
-            buildAction.performed += content =>
+        buildAction.performed += content =>
+        {
+            var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit) && hit.distance < 10.0f)
             {
-                var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit) && hit.distance < 10.0f)
+                if (hit.collider.gameObject.CompareTag("GunTower"))
                 {
-                    if (hit.collider.gameObject.CompareTag("GunTower"))
+                    buildingGunTower = hit.collider.gameObject.GetComponent<GunTower>();
+                    if (buildingGunTower.isFinished())
                     {
-                        buildingGunTower = hit.collider.gameObject.GetComponent<GunTower>();
-                        if (buildingGunTower.isFinished())
-                        {
-                            buildingGunTower = null;
-                        }
-                        return;
+                        buildingGunTower = null;
                     }
-                    if (hit.collider.gameObject.CompareTag("Ground") && resource >= 300)
-                    {
-                        var gts = GameObject.FindGameObjectsWithTag("GunTower");
-                        foreach (var gt in gts){
-                            print("Mag: " + (gt.transform.position - hit.point).magnitude.ToString());
-                            if ((gt.transform.position - hit.point).magnitude < 2)
-                            {
-                                return;
-                            }
-                        }
-                        resource -= 300;
-                        var raycastPos = hit.point;
-                        var obj = Instantiate(gunTower, hit.point + new Vector3(0f, 1f, 0f), Quaternion.Euler(0, 0, 0));
-                        buildingGunTower = obj.GetComponent<GunTower>();
-                        return;
-                    }
+                    return;
                 }
-            };
-            buildAction.canceled += content =>
-            {
-                buildingGunTower = null;
-            };
+                if (hit.collider.gameObject.CompareTag("Ground") && resource >= 300)
+                {
+                    var gts = GameObject.FindGameObjectsWithTag("GunTower");
+                    foreach (var gt in gts){
+                        print("Mag: " + (gt.transform.position - hit.point).magnitude.ToString());
+                        if ((gt.transform.position - hit.point).magnitude < 2)
+                        {
+                            return;
+                        }
+                    }
+                    resource -= 300;
+                    var raycastPos = hit.point;
+                    var obj = Instantiate(gunTower, hit.point + new Vector3(0f, 1f, 0f), Quaternion.Euler(0, 0, 0));
+                    buildingGunTower = obj.GetComponent<GunTower>();
+                    return;
+                }
+            }
+        };
+        buildAction.canceled += content =>
+        {
+            buildingGunTower = null;
+        };
+        var fireAction = GetComponent<PlayerInput>().actions["Fire"];
+        fireAction.performed += content => { firePressed = true; };
+        fireAction.canceled += content => { firePressed = false; };
     }
 
     private void FixedUpdate()
@@ -118,6 +124,13 @@ public class PlayerController : MonoBehaviour
         //Roll(moveDirection);
         playerPosition = transform.position;
         build();
+
+        if (firePressed && fireCooldown <= 0)
+        {
+            StartCoroutine(nameof(ThreeShoots));
+            fireCooldown = fireCooldownMax;
+        }
+        fireCooldown -= 1;
     }
 
     // Update is called once per frame
@@ -207,12 +220,27 @@ public class PlayerController : MonoBehaviour
         }
         _rotation.y += lookValue.x * 0.03f * _sensitivity;
     }
-    private void OnFire(InputValue value)
+
+    private void BulletGenerate(bool firstShoot=false)
     {
-        float isFire = value.Get<float>();
-        if (isFire > 0f)
+        Instantiate(bullet, bulletSpawnPoint.transform.position + bulletSpawnPoint.transform.forward * 2, transform.rotation);
+        if (!firstShoot)
         {
-            Instantiate(bullet, bulletSpawnPoint.transform.position + bulletSpawnPoint.transform.forward * 2, transform.rotation);
+            _rotation += new Vector2(Random.Range(-1.5f, -0.3f), Random.Range(-1f, 1f));
+        }
+    }
+
+    private IEnumerator ThreeShoots()
+    {
+        bool firstShoot = false;
+        if (fireCooldown < -10)
+        {
+            firstShoot = true;
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            BulletGenerate(firstShoot);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
