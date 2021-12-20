@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((transform.position - startPosition).magnitude > 20)
+        if ((transform.position - startPosition).magnitude > 50)
         {
             Destroy(gameObject);
         }    
@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
         //    Destroy(collision.gameObject);
         //}
 
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,6 +38,7 @@ public class Bullet : MonoBehaviour
         {
             other.gameObject.transform.parent.GetComponent<Enemy>().ReduceHealth();
             //Destroy(other.gameObject.transform.parent.gameObject);
+            Destroy(gameObject);
         }
 
         Destroy(gameObject,1f);

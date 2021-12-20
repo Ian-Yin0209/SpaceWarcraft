@@ -51,6 +51,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject winText;
     [SerializeField] GameObject loseText;
 
+    PlayerHealth playerHealth;
+    ScoreText scoreText;
+
+    // AMMO
+    public int ammo;
+    public int maxAmmo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,9 +72,14 @@ public class PlayerController : MonoBehaviour
         keyboard = InputSystem.GetDevice<Keyboard>();
 
         characterController = GetComponent<CharacterController>();
+        playerHealth = GetComponent<PlayerHealth>();
+        scoreText = FindObjectOfType<ScoreText>();
         buildBarIns = Instantiate(buildBar);
         buildBarIns.transform.SetParent(null, false);
         buildBarIns.SetActive(false);
+
+        // AMMO
+        ammo = maxAmmo;
     }
 
     private void Awake()
@@ -125,7 +137,7 @@ public class PlayerController : MonoBehaviour
         playerPosition = transform.position;
         build();
 
-        if (firePressed && fireCooldown <= 0)
+        if (firePressed && fireCooldown <= 0 && ammo > 0)
         {
             StartCoroutine(nameof(ThreeShoots));
             fireCooldown = fireCooldownMax;
@@ -150,6 +162,17 @@ public class PlayerController : MonoBehaviour
 
         // Player health
         ScoreText.setPlayerHealthText(GetComponent<PlayerHealth>().GetPlayerHealth());
+        ScoreText.setStaminaText(GetComponent<PlayerHealth>().GetPlayerStamina());
+        ScoreText.setAmmoText(ammo);
+
+        if (keyboard.hKey.isPressed)
+        {
+            scoreText.helpText.gameObject.SetActive(true);
+        }
+        else 
+        {
+            scoreText.helpText.gameObject.SetActive(false);
+        }
 
         // New - Jump and Run
         isGrounded = Physics.CheckSphere(groundCheck.position, checkRadius, groundMask);
@@ -166,18 +189,47 @@ public class PlayerController : MonoBehaviour
             downForce.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
 
-        if (keyboard.leftShiftKey.IsPressed())
+        if (keyboard.leftShiftKey.IsPressed() && playerHealth.GetPlayerStamina() > 0 && playerHealth.canRun)
         {
             speed = 1000;
+            if (mov_val.magnitude > 0)
+                playerHealth.ReduceStamina();
+            else 
+            {
+                if (mov_val.magnitude == 0)
+                    playerHealth.RecoverStamina();
+            }
         }
-        else 
+
+        else
         {
             speed = 500;
+            playerHealth.RecoverStamina();
         }
 
         transform.rotation = Quaternion.Euler(_rotation);
         ScoreText.setText(resource);
         //ScoreText.setEnemyText(enemyKills);
+
+        // AMMO
+        if (ammo < 0)
+        {
+            ammo = 0;
+        }
+
+        if (ammo > maxAmmo) 
+        {
+            ammo = maxAmmo;
+        }
+
+        if (keyboard.rKey.isPressed && (ammo - maxAmmo) <= 0) 
+        {
+            if (resource > 100)
+            {
+                ammo++;
+                resource -= 100;
+            }
+        }
     }
 
     // Unfinished
@@ -224,9 +276,10 @@ public class PlayerController : MonoBehaviour
     private void BulletGenerate(bool firstShoot=false)
     {
         Instantiate(bullet, bulletSpawnPoint.transform.position + bulletSpawnPoint.transform.forward * 2, transform.rotation);
+        
         if (!firstShoot)
         {
-            _rotation += new Vector2(Random.Range(-1.5f, -0.3f), Random.Range(-1f, 1f));
+            _rotation += new Vector2(Random.Range(-0.5f, -0.3f), Random.Range(-0.5f, 0.3f));
         }
     }
 
@@ -240,6 +293,7 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             BulletGenerate(firstShoot);
+            ammo--;
             yield return new WaitForSeconds(0.1f);
         }
     }
