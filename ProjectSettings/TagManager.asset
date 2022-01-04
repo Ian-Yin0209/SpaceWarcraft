@@ -42,8 +42,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - magma
+  - lightbeam
   m_SortingLayers:
   - name: Default
     uniqueID: 0
