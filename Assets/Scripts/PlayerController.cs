@@ -6,16 +6,19 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     Vector2 mov_val;
+    Vector2 mov_val_bkp;
     int speed = 500;
     private Vector2 _rotation;
     private CharacterController characterController;
-    private float _sensitivity = 3f;
+    public static float sensitivity = 2f;
     public GameObject bullet;
     public static Vector3 playerPosition;
     public Camera gameOverCam;
     public static int resource;
     public GameObject gunTower;
     public GameObject buildBar;
+    public GameObject menuPanel;
+    public static bool gamePaused = false;
     GameObject buildBarIns = null;
     GunTower buildingGunTower = null;
     private bool firePressed = false;
@@ -24,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     // Keyboard device
     Keyboard keyboard;
-
+    
     // Spawn point for bullet
     public GameObject bulletSpawnPoint;
 
@@ -127,10 +130,15 @@ public class PlayerController : MonoBehaviour
         var fireAction = GetComponent<PlayerInput>().actions["Fire"];
         fireAction.performed += content => { firePressed = true; };
         fireAction.canceled += content => { firePressed = false; };
+        var menuAction = GetComponent<PlayerInput>().actions["Menu"];
     }
 
     private void FixedUpdate()
     {
+        if (gamePaused)
+        {
+            return;
+        }
         Vector3 moveDirection = transform.forward * mov_val.y + transform.right * mov_val.x;
         characterController.SimpleMove(moveDirection * speed * Time.fixedDeltaTime);
         //Roll(moveDirection);
@@ -148,6 +156,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gamePaused)
+        {
+            return;
+        }
+
         // for win condition
         if (n >= 5) 
         {
@@ -168,10 +181,13 @@ public class PlayerController : MonoBehaviour
         if (keyboard.hKey.isPressed)
         {
             scoreText.helpText.gameObject.SetActive(true);
+            Time.timeScale = 0;
+            return;
         }
         else 
         {
             scoreText.helpText.gameObject.SetActive(false);
+            Time.timeScale = 1;
         }
 
         // New - Jump and Run
@@ -261,7 +277,7 @@ public class PlayerController : MonoBehaviour
     private void OnLook(InputValue value)
     {
         Vector2 lookValue = value.Get<Vector2>();
-        _rotation.x += -lookValue.y * 0.03f * _sensitivity;
+        _rotation.x += -lookValue.y * 0.03f * sensitivity;
         if (_rotation.x > 90)
         {
             _rotation.x = 90;
@@ -270,7 +286,26 @@ public class PlayerController : MonoBehaviour
         {
             _rotation.x = -90;
         }
-        _rotation.y += lookValue.x * 0.03f * _sensitivity;
+        _rotation.y += lookValue.x * 0.03f * sensitivity;
+    }
+
+    private void OnMenu(InputValue value)
+    {
+        if (!gamePaused){
+            gamePaused = true;
+            menuPanel.SetActive(true);
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+        else
+        {
+            gamePaused = false;
+            menuPanel.SetActive(false);
+            Time.timeScale = 1;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     private void BulletGenerate(bool firstShoot=false)
