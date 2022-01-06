@@ -15,14 +15,14 @@ public class PlayerController : MonoBehaviour
     public static Vector3 playerPosition;
     public Camera gameOverCam;
     public static int resource;
-    public GameObject gunTower;
+    public GameObject gunTurret;
     public GameObject buildBar;
     public GameObject menuPanel;
     public static bool gamePaused = false;
     GameObject buildBarIns = null;
-    GunTower buildingGunTower = null;
-    private bool firePressed = false;
-    private int fireCooldown = 0;
+    public GunTurret buildingGunTurret = null;
+    public bool firePressed = false;
+    private int fireCooldown = 0; 
     [SerializeField] private int fireCooldownMax = 15;
 
     // Keyboard device
@@ -89,48 +89,6 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        var buildAction = GetComponent<PlayerInput>().actions["Build"];
-        buildAction.performed += content =>
-        {
-            var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit) && hit.distance < 10.0f)
-            {
-                if (hit.collider.gameObject.CompareTag("GunTower"))
-                {
-                    buildingGunTower = hit.collider.gameObject.GetComponent<GunTower>();
-                    if (buildingGunTower.isFinished())
-                    {
-                        buildingGunTower = null;
-                    }
-                    return;
-                }
-                if (hit.collider.gameObject.CompareTag("Ground") && resource >= 300)
-                {
-                    var gts = GameObject.FindGameObjectsWithTag("GunTower");
-                    foreach (var gt in gts){
-                        print("Mag: " + (gt.transform.position - hit.point).magnitude.ToString());
-                        if ((gt.transform.position - hit.point).magnitude < 2)
-                        {
-                            return;
-                        }
-                    }
-                    resource -= 300;
-                    var raycastPos = hit.point;
-                    var obj = Instantiate(gunTower, hit.point + new Vector3(0f, 1f, 0f), Quaternion.Euler(0, 0, 0));
-                    buildingGunTower = obj.GetComponent<GunTower>();
-                    return;
-                }
-            }
-        };
-        buildAction.canceled += content =>
-        {
-            buildingGunTower = null;
-        };
-        var fireAction = GetComponent<PlayerInput>().actions["Fire"];
-        fireAction.performed += content => { firePressed = true; };
-        fireAction.canceled += content => { firePressed = false; };
-        var menuAction = GetComponent<PlayerInput>().actions["Menu"];
     }
 
     private void FixedUpdate()
@@ -270,13 +228,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnMove(InputValue value)
-    {
-        mov_val = value.Get<Vector2>();
+    public void setMovVal(Vector2 inVal){
+        mov_val = inVal;
     }
-    private void OnLook(InputValue value)
-    {
-        Vector2 lookValue = value.Get<Vector2>();
+
+    public void setLookVal(Vector2 lookValue){
         _rotation.x += -lookValue.y * 0.03f * sensitivity;
         if (_rotation.x > 90)
         {
@@ -289,24 +245,25 @@ public class PlayerController : MonoBehaviour
         _rotation.y += lookValue.x * 0.03f * sensitivity;
     }
 
-    private void OnMenu(InputValue value)
-    {
-        if (!gamePaused){
-            gamePaused = true;
-            menuPanel.SetActive(true);
-            Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
-        }
-        else
-        {
-            gamePaused = false;
-            menuPanel.SetActive(false);
-            Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-    }
+
+    // private void OnMenu(InputValue value)
+    // {
+    //     if (!gamePaused){
+    //         gamePaused = true;
+    //         menuPanel.SetActive(true);
+    //         Time.timeScale = 0;
+    //         Cursor.lockState = CursorLockMode.Confined;
+    //         Cursor.visible = true;
+    //     }
+    //     else
+    //     {
+    //         gamePaused = false;
+    //         menuPanel.SetActive(false);
+    //         Time.timeScale = 1;
+    //         Cursor.lockState = CursorLockMode.Locked;
+    //         Cursor.visible = false;
+    //     }
+    // }
 
     private void BulletGenerate(bool firstShoot=false)
     {
@@ -350,15 +307,49 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void tryBuild(){
+        var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit) && hit.distance < 10.0f)
+        {
+            if (hit.collider.gameObject.CompareTag("GunTurret"))
+            {
+                buildingGunTurret = hit.collider.gameObject.GetComponent<GunTurret>();
+                if (buildingGunTurret.isFinished())
+                {
+                    buildingGunTurret = null;
+                }
+                return;
+            }
+            if (hit.collider.gameObject.CompareTag("Ground") && resource >= 300)
+            {
+                var gts = GameObject.FindGameObjectsWithTag("GunTurret");
+                foreach (var gt in gts){
+                    print("Mag: " + (gt.transform.position - hit.point).magnitude.ToString());
+                    if ((gt.transform.position - hit.point).magnitude < 2)
+                    {
+                        return;
+                    }
+                }
+                resource -= 300;
+                var obj = Instantiate(gunTurret, hit.point + new Vector3(0f, 1f, 0f), Quaternion.Euler(0, 0, 0));
+                print(obj);
+                print(obj.transform.position);
+                buildingGunTurret = obj.GetComponent<GunTurret>();
+                return;
+            }
+        }
+    }
+
     private void build()
     {
-        if (buildingGunTower != null && resource > 0 && !buildingGunTower.isFinished())
+        if (buildingGunTurret != null && resource > 0 && !buildingGunTurret.isFinished())
         {
             resource -= 1;
-            buildingGunTower.build(0.2f * Time.fixedDeltaTime);
-            buildBarIns.transform.position = transform.position * 0.25f + buildingGunTower.transform.position * 0.75f;
-            buildBarIns.transform.LookAt(buildingGunTower.transform.position);
-            buildBarIns.GetComponent<BuildProcessBar>().setValue(buildingGunTower.buildingProgress);
+            buildingGunTurret.build(0.2f * Time.fixedDeltaTime);
+            buildBarIns.transform.position = transform.position * 0.25f + buildingGunTurret.transform.position * 0.75f;
+            buildBarIns.transform.LookAt(buildingGunTurret.transform.position);
+            buildBarIns.GetComponent<BuildProcessBar>().setValue(buildingGunTurret.buildingProgress);
             buildBarIns.SetActive(true);
         }
         else

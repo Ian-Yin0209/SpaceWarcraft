@@ -7,10 +7,10 @@ TagManager:
   - Enemy
   - Bullet
   - Ground
-  - GunTower
   - EnemyBody
   - ShipPart
   - BaseDoor
+  - GunTurret
   layers:
   - Default
   - TransparentFX

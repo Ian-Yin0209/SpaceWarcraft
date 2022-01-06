@@ -1,7 +1,11 @@
+#define DEBUG_STACK_LEAK
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+
+
 
 public class Enemy : MonoBehaviour
 {
@@ -12,14 +16,14 @@ public class Enemy : MonoBehaviour
 
     // New Enemy Attack
     [SerializeField] bool isPlayerInRadius = false;
-    [SerializeField] bool isGunTowerInRadius = false;
+    [SerializeField] bool isGunTurretInRadius = false;
     [SerializeField] bool provoked = false;
     [SerializeField] GameObject enemyBullet;
     [SerializeField] Transform bulletPoint;
     float timeToShoot = 0.3f;
 
     GameObject player;
-    [SerializeField] GameObject gunTower;
+    [SerializeField] GameObject gunTurret;
     GameObject[] newObject = new GameObject[50];
     int n = 0;
 
@@ -66,8 +70,8 @@ public class Enemy : MonoBehaviour
             }
         }
 
-        // Attack tower
-        else if (isGunTowerInRadius && !isPlayerInRadius)
+        // Attack turret
+        else if (isGunTurretInRadius && !isPlayerInRadius)
         {
             foreach (GameObject gameObject in newObject)
             {
@@ -142,9 +146,9 @@ public class Enemy : MonoBehaviour
             isPlayerInRadius = true;
         }
 
-        if (other.gameObject.CompareTag("GunTower"))
+        if (other.gameObject.CompareTag("GunTurret"))
         {
-            isGunTowerInRadius = true;
+            isGunTurretInRadius = true;
             newObject[n] = other.gameObject;
             n += 1;
         }
@@ -158,9 +162,9 @@ public class Enemy : MonoBehaviour
             provoked = false;
         }
 
-        if (other.gameObject.CompareTag("GunTower"))
+        if (other.gameObject.CompareTag("GunTurret"))
         {
-            isGunTowerInRadius = false;
+            isGunTurretInRadius = false;
             provoked = false;
         }
     }

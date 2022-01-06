@@ -43,9 +43,9 @@ public class EnemyBullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (other.gameObject.CompareTag("GunTower"))
+        if (other.gameObject.CompareTag("GunTurret"))
         {
-            other.gameObject.GetComponent<GunTower>().ReduceHealth();
+            other.gameObject.GetComponent<GunTurret>().ReduceHealth();
             Destroy(gameObject);
         }
     }
