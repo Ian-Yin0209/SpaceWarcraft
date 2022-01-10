@@ -246,25 +246,6 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    // private void OnMenu(InputValue value)
-    // {
-    //     if (!gamePaused){
-    //         gamePaused = true;
-    //         menuPanel.SetActive(true);
-    //         Time.timeScale = 0;
-    //         Cursor.lockState = CursorLockMode.Confined;
-    //         Cursor.visible = true;
-    //     }
-    //     else
-    //     {
-    //         gamePaused = false;
-    //         menuPanel.SetActive(false);
-    //         Time.timeScale = 1;
-    //         Cursor.lockState = CursorLockMode.Locked;
-    //         Cursor.visible = false;
-    //     }
-    // }
-
     private void BulletGenerate(bool firstShoot=false)
     {
         Instantiate(bullet, bulletSpawnPoint.transform.position + bulletSpawnPoint.transform.forward * 2, transform.rotation);
