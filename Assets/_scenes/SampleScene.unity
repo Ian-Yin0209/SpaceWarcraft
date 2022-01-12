@@ -51139,6 +51139,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6017baf8887cf42489bca4aca0734342, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - name: player_shoot
+    audioClip: {fileID: 8300000, guid: 2af3b040a804efe40bf909f4cbb12f0c, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_shoot
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: enemy_motion
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: player_walk
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: player_run
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: player_metal_motion
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: item_pickup
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: UI_clicks
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: UI_hover
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 0
+    source: {fileID: 0}
+  - name: background_music
+    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    volume: 0.25
+    loop: 1
+    source: {fileID: 0}
 --- !u!1001 &1994809819
 PrefabInstance:
   m_ObjectHideFlags: 0
