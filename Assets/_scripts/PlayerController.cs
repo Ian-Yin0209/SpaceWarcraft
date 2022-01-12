@@ -145,6 +145,7 @@ public class PlayerController : MonoBehaviour
         }
         Vector3 moveDirection = transform.forward * mov_val.y + transform.right * mov_val.x;
         characterController.SimpleMove(moveDirection * speed * Time.fixedDeltaTime);
+
         //Roll(moveDirection);
         playerPosition = transform.position;
         build();
@@ -212,8 +213,11 @@ public class PlayerController : MonoBehaviour
         if (keyboard.leftShiftKey.IsPressed() && playerHealth.GetPlayerStamina() > 0 && playerHealth.canRun)
         {
             speed = 1000;
-            if (mov_val.magnitude > 0)
+            if (mov_val.magnitude > 0 && speed == 1000) 
+            {
                 playerHealth.ReduceStamina();
+            }
+                
             else 
             {
                 if (mov_val.magnitude == 0)
@@ -315,8 +319,8 @@ public class PlayerController : MonoBehaviour
     private void BulletGenerate(bool firstShoot=false)
     {
         Instantiate(bullet, bulletSpawnPoint.transform.position + bulletSpawnPoint.transform.forward * 2, transform.rotation);
-        
-        
+        soundManager.PlaySound("player_shoot");
+
         if (!firstShoot)
         {
             _rotation += new Vector2(Random.Range(-0.5f, -0.3f), Random.Range(-0.5f, 0.3f));
@@ -326,7 +330,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator ThreeShoots()
     {
         bool firstShoot = false;
-        soundManager.PlaySound("player_shoot");
+        
         if (fireCooldown < -10)
         {
             firstShoot = true;

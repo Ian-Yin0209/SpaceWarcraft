@@ -51141,12 +51141,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: player_shoot
-    audioClip: {fileID: 8300000, guid: 2af3b040a804efe40bf909f4cbb12f0c, type: 3}
+    audioClip: {fileID: 8300000, guid: 80c08dfa25f9a0e49899564abdf96ca3, type: 3}
     volume: 0.25
     loop: 0
     source: {fileID: 0}
   - name: enemy_shoot
-    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    audioClip: {fileID: 8300000, guid: 5de16570d443320439bae91025f2a985, type: 3}
     volume: 0.25
     loop: 0
     source: {fileID: 0}
@@ -51156,17 +51156,17 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: player_walk
-    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    audioClip: {fileID: 8300000, guid: 382aecfb83095f64584eba5da1bc8512, type: 3}
     volume: 0.25
     loop: 0
     source: {fileID: 0}
   - name: player_run
-    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    audioClip: {fileID: 8300000, guid: bb2b5779e6103d54e9b75c9e90134e8e, type: 3}
     volume: 0.25
     loop: 0
     source: {fileID: 0}
   - name: player_metal_motion
-    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    audioClip: {fileID: 8300000, guid: a3d7de4ef91296943ace159b5be6d9f3, type: 3}
     volume: 0.25
     loop: 0
     source: {fileID: 0}
@@ -51186,7 +51186,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: background_music
-    audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
+    audioClip: {fileID: 8300000, guid: 3695e9d74639ff2479489ffa010f3e37, type: 3}
     volume: 0.25
     loop: 1
     source: {fileID: 0}
