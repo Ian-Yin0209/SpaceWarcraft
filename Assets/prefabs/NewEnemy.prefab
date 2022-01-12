@@ -294,6 +294,7 @@ MonoBehaviour:
   agent: {fileID: 7375445016396520307}
   isPlayerInRadius: 0
   isGunTowerInRadius: 0
+  provoked: 0
   enemyBullet: {fileID: 3864707384516103563, guid: f31d21a0c6bab97439b314e318609c67, type: 3}
   bulletPoint: {fileID: 7375445015059726516}
   gunTower: {fileID: 7788935553831189646, guid: 75d7e773e0a25ec419865e831e207bf9, type: 3}
@@ -346,5 +347,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 10
   m_Center: {x: 0, y: 2, z: 0}
