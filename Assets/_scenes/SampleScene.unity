@@ -51170,7 +51170,7 @@ MonoBehaviour:
     volume: 0.25
     loop: 0
     source: {fileID: 0}
-  - name: item_pickup
+  - name: player_jump
     audioClip: {fileID: 8300000, guid: 8627f7eddf5303a458b38a4f6c5a3892, type: 3}
     volume: 0.25
     loop: 0
@@ -51187,7 +51187,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: background_music
     audioClip: {fileID: 8300000, guid: 3695e9d74639ff2479489ffa010f3e37, type: 3}
-    volume: 0.25
+    volume: 0.05
     loop: 1
     source: {fileID: 0}
 --- !u!1001 &1994809819
