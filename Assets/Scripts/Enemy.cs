@@ -95,6 +95,7 @@ public class Enemy : MonoBehaviour
 
     public void ReduceHealth() 
     {
+        print(health);
         health--;
     }
 

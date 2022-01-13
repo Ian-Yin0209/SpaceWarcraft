@@ -23,11 +23,11 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Enemy")) 
-        //{
-        //    collision.gameObject.GetComponent<Enemy>().DropItem();
-        //    Destroy(collision.gameObject);
-        //}
+        if (collision.gameObject.CompareTag("Enemy")) 
+        {
+           collision.gameObject.GetComponent<Rigidbody>().AddForce(transform.forward * 0.01f);
+           collision.gameObject.GetComponent<Enemy>().ReduceHealth();
+        }
 
         Destroy(gameObject);
     }
@@ -36,6 +36,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("EnemyBody"))
         {
+            print("hit body");
             other.gameObject.transform.parent.GetComponent<Enemy>().ReduceHealth();
             //Destroy(other.gameObject.transform.parent.gameObject);
             Destroy(gameObject);
