@@ -23,7 +23,7 @@ namespace LowPolyWater
 
         void Start()
         {
-            CreateMeshLowPoly(meshFilter);
+            //CreateMeshLowPoly(meshFilter);
         }
 
         /// <summary>
@@ -53,9 +53,9 @@ namespace LowPolyWater
 
             //Update the gameobject's mesh with new vertices
             mesh.vertices = vertices;
-            mesh.SetTriangles(triangles, 0);
-            mesh.RecalculateBounds();
-            mesh.RecalculateNormals();
+            //mesh.SetTriangles(triangles, 0);
+            //mesh.RecalculateBounds();
+            //mesh.RecalculateNormals();
             this.vertices = mesh.vertices;
 
             return mf;
@@ -63,7 +63,7 @@ namespace LowPolyWater
         
         void Update()
         {
-            GenerateWaves();
+            //GenerateWaves();
         }
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace LowPolyWater
             }
 
             //Update the mesh properties
-            mesh.vertices = vertices;
-            mesh.RecalculateNormals();
+            //mesh.vertices = vertices;
+            //mesh.RecalculateNormals();
             mesh.MarkDynamic();
             meshFilter.mesh = mesh;
         }
