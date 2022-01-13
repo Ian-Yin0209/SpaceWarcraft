@@ -2994,8 +2994,8 @@ MonoBehaviour:
   playerInBase: 0
   winText: {fileID: 435181554}
   loseText: {fileID: 1523729190}
-  ammo: 500
-  maxAmmo: 500
+  ammo: 600
+  maxAmmo: 600
 --- !u!136 &117225157
 CapsuleCollider:
   m_ObjectHideFlags: 0
