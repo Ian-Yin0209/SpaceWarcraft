@@ -45,7 +45,6 @@ public class EnemyBullet : MonoBehaviour
 
         if (other.gameObject.layer == LayerMask.NameToLayer("Walls") || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
-            print("###" + other.gameObject.layer.ToString());
             Destroy(gameObject);
         }
 
