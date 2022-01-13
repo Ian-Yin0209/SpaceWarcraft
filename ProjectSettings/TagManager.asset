@@ -12,6 +12,15 @@ TagManager:
   - BaseDoor
   - GunTurret
   - Walls
+  - zone_1_start
+  - zone_1_end
+  - zone_2_start
+  - zone_2_end
+  - zone_3_start
+  - zone_3_end
+  - zone_4_start
+  - zone_4_end
+  - GameManager
   layers:
   - Default
   - TransparentFX

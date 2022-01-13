@@ -34,7 +34,7 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        PlaySound("background_music");
+        PlaySound("bg_area_1");
     }
 
     public void PlaySound(string name)
