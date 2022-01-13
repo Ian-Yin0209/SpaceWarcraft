@@ -184,5 +184,6 @@ public class Enemy : MonoBehaviour
     public void Attack()
     {
         Instantiate(enemyBullet, bulletPoint.transform.position, transform.rotation);
+        FindObjectOfType<SoundManager>().PlaySound("enemy_shoot");
     }
 }
