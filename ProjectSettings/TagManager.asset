@@ -11,6 +11,7 @@ TagManager:
   - ShipPart
   - BaseDoor
   - GunTurret
+  - Walls
   layers:
   - Default
   - TransparentFX

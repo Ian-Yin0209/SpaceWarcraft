@@ -29,6 +29,12 @@ public class InputManager : MonoBehaviour
         var fireAction = GetComponent<PlayerInput>().actions["Fire"];
         fireAction.performed += content => { pc.firePressed = true; };
         fireAction.canceled += content => { pc.firePressed = false; };
+        var helpAction = GetComponent<PlayerInput>().actions["Help"];
+        helpAction.performed += content => { pc.helpPressed = true; };
+        helpAction.canceled += content => { pc.helpPressed = false; };
+        var rushAction = GetComponent<PlayerInput>().actions["Rush"];
+        rushAction.performed += content => { pc.rushPressed = true; };
+        rushAction.canceled += content => { pc.rushPressed = false; };
         var menuAction = GetComponent<PlayerInput>().actions["Menu"];
     }
 
@@ -55,6 +61,10 @@ public class InputManager : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
+    }
+
+    private void OnAmmo(InputValue value){
+        pc.purchaseAmmo();
     }
 
     private void OnMove(InputValue value)
