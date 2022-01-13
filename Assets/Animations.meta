@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Scenes/StartScene_Menu.unity.meta
+guid: 2cf2cad1cb7654a4ca3b8eee79899c38
+=======
 guid: dd7fa5e3c024d544093c3dd9005bb2cb
 folderAsset: yes
+>>>>>>> test_master:Assets/Animations.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

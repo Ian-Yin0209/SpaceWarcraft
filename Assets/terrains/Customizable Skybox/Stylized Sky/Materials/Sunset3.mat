@@ -12,8 +12,8 @@ Material:
   m_ShaderKeywords: _HORIZONLINEBLENDMODE_ADD _SUNHALOBLENDMODE_ADD _VIEW_FINAL
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -55,6 +55,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _BumpScale: 1
     - _Cutoff: 0.5
@@ -75,12 +76,12 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SunDiscContribution: 1
-    - _SunDiscExponent: 100000
+    - _SunDiscExponent: 99395
     - _SunDiscExponentSize: 100000
-    - _SunDiscMultiplier: 100000
+    - _SunDiscMultiplier: 99999.71
     - _SunDiscMultiplierSharpness: 1000
     - _SunHaloBlendMode: 0
-    - _SunHaloContribution: 0.5
+    - _SunHaloContribution: 0.424
     - _SunHaloExponent: 100
     - _UVSec: 0
     - _View: 0
@@ -94,3 +95,4 @@ Material:
     - _SkyGradientTop: {r: 0, g: 0, b: 0, a: 1}
     - _SunDiscColor: {r: 1, g: 1, b: 1, a: 1}
     - _SunHaloColor: {r: 1, g: 0.37821245, b: 0.108490564, a: 1}
+  m_BuildTextureStacks: []

@@ -7,7 +7,9 @@ public class PlayerController : MonoBehaviour
 {
     Vector2 mov_val;
     Vector2 mov_val_bkp;
-    int speed = 500;
+    int speed;
+    public int walkSpeed = 500;
+    public int runSpeed = 1500;
     private Vector2 _rotation;
     private CharacterController characterController;
     public static float sensitivity = 2f;
@@ -15,14 +17,14 @@ public class PlayerController : MonoBehaviour
     public static Vector3 playerPosition;
     public Camera gameOverCam;
     public static int resource;
-    public GameObject gunTower;
+    public GameObject gunTurret;
     public GameObject buildBar;
     public GameObject menuPanel;
     public static bool gamePaused = false;
     GameObject buildBarIns = null;
-    GunTower buildingGunTower = null;
-    private bool firePressed = false;
-    private int fireCooldown = 0;
+    public GunTurret buildingGunTurret = null;
+    public bool firePressed = false;
+    private int fireCooldown = 0; 
     [SerializeField] private int fireCooldownMax = 15;
 
     // Keyboard device
@@ -212,12 +214,9 @@ public class PlayerController : MonoBehaviour
 
         if (keyboard.leftShiftKey.IsPressed() && playerHealth.GetPlayerStamina() > 0 && playerHealth.canRun)
         {
-            speed = 1000;
-            if (mov_val.magnitude > 0 && speed == 1000) 
-            {
+            speed = runSpeed;
+            if (mov_val.magnitude > 0)
                 playerHealth.ReduceStamina();
-            }
-                
             else 
             {
                 if (mov_val.magnitude == 0)
@@ -227,7 +226,7 @@ public class PlayerController : MonoBehaviour
 
         else
         {
-            speed = 500;
+            speed = walkSpeed;
             playerHealth.RecoverStamina();
         }
 
@@ -278,13 +277,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnMove(InputValue value)
-    {
-        mov_val = value.Get<Vector2>();
+    public void setMovVal(Vector2 inVal){
+        mov_val = inVal;
     }
-    private void OnLook(InputValue value)
-    {
-        Vector2 lookValue = value.Get<Vector2>();
+
+    public void setLookVal(Vector2 lookValue){
         _rotation.x += -lookValue.y * 0.03f * sensitivity;
         if (_rotation.x > 90)
         {
@@ -338,7 +335,6 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             BulletGenerate(firstShoot);
-
             ammo--;
             yield return new WaitForSeconds(0.1f);
         }
@@ -361,15 +357,49 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void tryBuild(){
+        var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit) && hit.distance < 10.0f)
+        {
+            if (hit.collider.gameObject.CompareTag("GunTurret"))
+            {
+                buildingGunTurret = hit.collider.gameObject.GetComponent<GunTurret>();
+                if (buildingGunTurret.isFinished())
+                {
+                    buildingGunTurret = null;
+                }
+                return;
+            }
+            if (hit.collider.gameObject.CompareTag("Ground") && resource >= 300)
+            {
+                var gts = GameObject.FindGameObjectsWithTag("GunTurret");
+                foreach (var gt in gts){
+                    print("Mag: " + (gt.transform.position - hit.point).magnitude.ToString());
+                    if ((gt.transform.position - hit.point).magnitude < 2)
+                    {
+                        return;
+                    }
+                }
+                resource -= 300;
+                var obj = Instantiate(gunTurret, hit.point + new Vector3(0f, 1f, 0f), Quaternion.Euler(0, 0, 0));
+                print(obj);
+                print(obj.transform.position);
+                buildingGunTurret = obj.GetComponent<GunTurret>();
+                return;
+            }
+        }
+    }
+
     private void build()
     {
-        if (buildingGunTower != null && resource > 0 && !buildingGunTower.isFinished())
+        if (buildingGunTurret != null && resource > 0 && !buildingGunTurret.isFinished())
         {
             resource -= 1;
-            buildingGunTower.build(0.2f * Time.fixedDeltaTime);
-            buildBarIns.transform.position = transform.position * 0.25f + buildingGunTower.transform.position * 0.75f;
-            buildBarIns.transform.LookAt(buildingGunTower.transform.position);
-            buildBarIns.GetComponent<BuildProcessBar>().setValue(buildingGunTower.buildingProgress);
+            buildingGunTurret.build(0.2f * Time.fixedDeltaTime);
+            buildBarIns.transform.position = transform.position * 0.25f + buildingGunTurret.transform.position * 0.75f;
+            buildBarIns.transform.LookAt(buildingGunTurret.transform.position);
+            buildBarIns.GetComponent<BuildProcessBar>().setValue(buildingGunTurret.buildingProgress);
             buildBarIns.SetActive(true);
         }
         else

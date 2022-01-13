@@ -41,6 +41,16 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (other.gameObject.CompareTag("Ground")) 
+        {
+            Destroy(gameObject);
+        }
+
+        if (other.gameObject.layer.ToString() == "Walls")
+        {
+            Destroy(gameObject);
+        }
+
         Destroy(gameObject,1f);
     }
 }

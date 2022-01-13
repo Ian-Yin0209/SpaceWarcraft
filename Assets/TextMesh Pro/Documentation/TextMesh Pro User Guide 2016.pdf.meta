@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/TextMesh Pro/Documentation/TextMesh Pro User Guide 2016.pdf.meta
 guid: 1b8d251f9af63b746bf2f7ffe00ebb9b
+=======
+guid: 0f376ff6902925b44b85fa679a09d83a
+folderAsset: yes
+>>>>>>> test_master:Assets/Other files.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
