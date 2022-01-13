@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
     void Update()
     {
         PlayerController.sensitivity = sensitivitySlider.value;
-        //TODO adjust value here
+        AudioListener.volume = volumeSlider.value;
     }
 
     public void OnClickContinue()
