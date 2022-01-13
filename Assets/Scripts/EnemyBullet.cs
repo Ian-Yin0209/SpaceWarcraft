@@ -25,12 +25,6 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.CompareTag("Enemy"))
-        //{
-        //    collision.gameObject.GetComponent<Enemy>().DropItem();
-        //    Destroy(collision.gameObject);
-        //}
-
         Destroy(gameObject);
     }
 
@@ -49,9 +43,10 @@ public class EnemyBullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (other.gameObject.CompareTag("Walls") || other.gameObject.CompareTag("Ground"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Walls") || other.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             Destroy(gameObject);
         }
+
     }
 }
