@@ -43,3 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e648e6eeacea2342a9c543ebf52e412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zoneText: {fileID: 0}
+  zone1Complete: 0
+  zone2Complete: 0
+  zone3Complete: 0
+  zone4Complete: 0
+  inZone1: 0
+  inZone2: 0
+  inZone3: 0
+  inZone4: 0
+  inBase: 0

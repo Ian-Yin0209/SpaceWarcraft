@@ -5,37 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    // Movement variables
     Vector2 mov_val;
     Vector2 mov_val_bkp;
     int speed;
     public int walkSpeed = 500;
     public int runSpeed = 1500;
-    private Vector2 _rotation;
-    private CharacterController characterController;
-    public static float sensitivity = 2f;
-    public GameObject bullet;
-    public static Vector3 playerPosition;
-    public Camera gameOverCam;
-    public static int resource;
-    public GameObject gunTurret;
-    public GameObject buildBar;
-    public GameObject menuPanel;
-    public static bool gamePaused = false;
-    GameObject buildBarIns = null;
-    public GunTurret buildingGunTurret = null;
-    public bool firePressed = false;
-    public bool helpPressed = false;
-    public bool rushPressed = false;
-    private int fireCooldown = 0; 
-    [SerializeField] private int fireCooldownMax = 15;
 
-    // Keyboard device
-    Keyboard keyboard;
-    
-    // Spawn point for bullet
-    public GameObject bulletSpawnPoint;
-
-    //public static int enemyKills;
     // For Jump
     [SerializeField] float jumpHeight = 5.0f;
     [SerializeField] LayerMask groundMask;
@@ -50,6 +26,37 @@ public class PlayerController : MonoBehaviour
     float requiredTime = 0.5f;
     bool doublePressed = false;
     //float rollSpeed = 1500f;
+
+    // Camera
+    private Vector2 _rotation;
+    private CharacterController characterController;
+    public static float sensitivity = 2f;
+    public Camera gameOverCam;
+
+    // Gameplay
+    public GunTurret buildingGunTurret = null;
+    private int fireCooldown = 0;
+    [SerializeField] private int fireCooldownMax = 15;
+
+    public GameObject bullet;
+    public GameObject gunTurret;
+    public GameObject buildBar;
+    public GameObject menuPanel;
+    public GameObject bulletSpawnPoint; // Spawn point for bullet
+    GameObject buildBarIns = null;
+
+    public static Vector3 playerPosition;
+    public static int resource;
+    public static bool gamePaused = false;
+    
+    public bool firePressed = false;
+    public bool helpPressed = false;
+    public bool rushPressed = false;
+    
+    // Keyboard input
+    Keyboard keyboard;
+    
+    //public static int enemyKills;
 
     // For win - prototype (temp)
     [SerializeField] bool collectedAllParts = false;
@@ -371,11 +378,64 @@ public class PlayerController : MonoBehaviour
         {
             playerInBase = true;
         }
+
+        if (other.gameObject.CompareTag("zone_1_start")) 
+        {
+            GameManager.instance.inZone1 = true;
+            GameManager.instance.inZone2 = false;
+            GameManager.instance.inZone3 = false;
+            GameManager.instance.inZone4 = false;
+            GameManager.instance.inBase = false;
+        }
+
+        else if (other.gameObject.CompareTag("zone_2_start"))
+        {
+            GameManager.instance.inZone1 = false;
+            GameManager.instance.inZone2 = true;
+            GameManager.instance.inZone3 = false;
+            GameManager.instance.inZone4 = false;
+        }
+
+        else if (other.gameObject.CompareTag("zone_3_start"))
+        {
+            GameManager.instance.inZone1 = false;
+            GameManager.instance.inZone2 = false;
+            GameManager.instance.inZone3 = true;
+            GameManager.instance.inZone4 = false;
+        }
+
+        else if (other.gameObject.CompareTag("zone_4_start"))
+        {
+            GameManager.instance.inZone1 = false;
+            GameManager.instance.inZone2 = false;
+            GameManager.instance.inZone3 = false;
+            GameManager.instance.inZone4 = true;
+        }
+
+        else if (other.gameObject.CompareTag("zone_1_end"))
+        {
+            GameManager.instance.inZone1 = false;
+        }
+
+        else if (other.gameObject.CompareTag("zone_2_end"))
+        {
+            GameManager.instance.inZone2 = false;
+        }
+
+        else if (other.gameObject.CompareTag("zone_3_end"))
+        {
+            GameManager.instance.inZone3 = false;
+        }
+
+        else if (other.gameObject.CompareTag("zone_4_end"))
+        {
+            GameManager.instance.inZone4 = false;
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("BaseDoor")) 
+        if (other.gameObject.CompareTag("BaseDoor"))
         {
             playerInBase = false;
         }
