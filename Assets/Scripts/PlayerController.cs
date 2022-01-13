@@ -95,44 +95,7 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        var buildAction = GetComponent<PlayerInput>().actions["Build"];
-        buildAction.performed += content =>
-        {
-            var ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit) && hit.distance < 10.0f)
-            {
-                if (hit.collider.gameObject.CompareTag("GunTower"))
-                {
-                    buildingGunTower = hit.collider.gameObject.GetComponent<GunTower>();
-                    if (buildingGunTower.isFinished())
-                    {
-                        buildingGunTower = null;
-                    }
-                    return;
-                }
-                if (hit.collider.gameObject.CompareTag("Ground") && resource >= 300)
-                {
-                    var gts = GameObject.FindGameObjectsWithTag("GunTower");
-                    foreach (var gt in gts){
-                        print("Mag: " + (gt.transform.position - hit.point).magnitude.ToString());
-                        if ((gt.transform.position - hit.point).magnitude < 2)
-                        {
-                            return;
-                        }
-                    }
-                    resource -= 300;
-                    var raycastPos = hit.point;
-                    var obj = Instantiate(gunTower, hit.point + new Vector3(0f, 1f, 0f), Quaternion.Euler(0, 0, 0));
-                    buildingGunTower = obj.GetComponent<GunTower>();
-                    return;
-                }
-            }
-        };
-        buildAction.canceled += content =>
-        {
-            buildingGunTower = null;
-        };
+
         var fireAction = GetComponent<PlayerInput>().actions["Fire"];
         fireAction.performed += content => { firePressed = true; };
         fireAction.canceled += content => { firePressed = false; };
