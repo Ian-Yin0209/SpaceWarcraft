@@ -89,8 +89,28 @@ MonoBehaviour:
     volume: 0.25
     loop: 0
     source: {fileID: 0}
-  - name: background_music
-    audioClip: {fileID: 8300000, guid: 3695e9d74639ff2479489ffa010f3e37, type: 3}
+  - name: bg_area_1
+    audioClip: {fileID: 8300000, guid: a409ac60d4d85d146acf47bab0bada9b, type: 3}
+    volume: 0.1
+    loop: 1
+    source: {fileID: 0}
+  - name: bg_area_2
+    audioClip: {fileID: 8300000, guid: 294c32f5048fc7946b251ba39540887e, type: 3}
+    volume: 0.05
+    loop: 1
+    source: {fileID: 0}
+  - name: bg_area_3
+    audioClip: {fileID: 8300000, guid: 0af4f8b9a65b9494ba2b9c463717a948, type: 3}
+    volume: 0.05
+    loop: 1
+    source: {fileID: 0}
+  - name: bg_area_4
+    audioClip: {fileID: 8300000, guid: 80e9698db48766749b00c363e846387b, type: 3}
+    volume: 0.05
+    loop: 1
+    source: {fileID: 0}
+  - name: bg_menu
+    audioClip: {fileID: 8300000, guid: 5cb24cc441a6a7046b01be5ed505e1e9, type: 3}
     volume: 0.05
     loop: 1
     source: {fileID: 0}
