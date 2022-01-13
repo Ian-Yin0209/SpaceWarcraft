@@ -1,5 +1,3 @@
-#define DEBUG_STACK_LEAK
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,26 +13,32 @@ public class Enemy : MonoBehaviour
     GameObject target;
 
     // New Enemy Attack
-    [SerializeField] bool isPlayerInRadius = false;
-    [SerializeField] bool isGunTurretInRadius = false;
-    [SerializeField] bool provoked = false;
+    bool isPlayerInRadius = false;
+    bool isGunTurretInRadius = false;
+    bool provoked = false;
     [SerializeField] GameObject enemyBullet;
     [SerializeField] Transform bulletPoint;
     float timeToShoot = 0.3f;
 
     GameObject player;
     [SerializeField] GameObject gunTurret;
+
+    [SerializeField] int maxHealth = 5;
+    [SerializeField] int meleeAttack = 0;
     GameObject[] newObject = new GameObject[50];
     int n = 0;
 
     // Enemy Health
-    int health = 5;
+    int health;
+
+    [SerializeField] int meleeCooldown = 0;
 
     //[SerializeField] GameObject pickupHolder;
 
     // Start is called before the first frame update
     void Start()
     {
+        health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -112,6 +116,10 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
+        meleeCooldown -= 1;
+        if (meleeCooldown > 0){
+            print(meleeCooldown);
+        }
         //float angle = Vector3.Angle(target.transform.position - transform.position, transform.forward);
         turn(0.7f);
         //if (target != null && angle < 25f || (target.transform.position - transform.position).magnitude < 2)
@@ -128,8 +136,10 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (meleeCooldown <= 0 && collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<PlayerHealth>().ReduceHealth(meleeAttack);
+            meleeCooldown = 40;   
             //Destroy(collision.gameObject);
         }
     }

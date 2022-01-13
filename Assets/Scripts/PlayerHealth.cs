@@ -37,10 +37,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void ReduceHealth() 
+    public void ReduceHealth(int demage) 
     {
-        health--;
-        //Debug.Log(health);
+        health -= demage;
+        if (demage > 1){
+            Debug.Log(health.ToString() + ' ' + demage.ToString());
+        }
     }
 
     public void ReduceStamina() 

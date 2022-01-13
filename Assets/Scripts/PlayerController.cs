@@ -290,13 +290,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if (hit.gameObject.CompareTag("Enemy"))
-        {
-            Destroy(gameObject);
-        }
-    }
+    // private void OnControllerColliderHit(ControllerColliderHit hit)
+    // {
+    //     if (hit.gameObject.CompareTag("Enemy"))
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
 
     private void OnDestroy()
     {
