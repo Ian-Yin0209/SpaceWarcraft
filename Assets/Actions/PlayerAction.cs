@@ -65,6 +65,30 @@ public class @PlayerAction : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Help"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d0a0cc5-a0bb-4fb5-870d-ca1aca564f08"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Ammo"",
+                    ""type"": ""Button"",
+                    ""id"": ""43f9cf99-b12e-41b8-a207-90d7e3d4132e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Rush"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e1586b3-3aca-40cb-9ede-9ca88d7d7ad1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -318,6 +342,50 @@ public class @PlayerAction : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86cf6f57-255a-4f7d-b3fb-d940e69f4a1f"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Menu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42e7dd8a-dbe4-4bbe-8124-e7983c9937bc"",
+                    ""path"": ""<Keyboard>/h"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Help"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41720ce5-552f-48de-81ea-27150d5043b9"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ammo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7802cb74-db38-4605-a16a-3f96bd706525"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rush"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -901,6 +969,9 @@ public class @PlayerAction : IInputActionCollection, IDisposable
         m_Player_Build = m_Player.FindAction("Build", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Menu = m_Player.FindAction("Menu", throwIfNotFound: true);
+        m_Player_Help = m_Player.FindAction("Help", throwIfNotFound: true);
+        m_Player_Ammo = m_Player.FindAction("Ammo", throwIfNotFound: true);
+        m_Player_Rush = m_Player.FindAction("Rush", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -968,6 +1039,9 @@ public class @PlayerAction : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Build;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Menu;
+    private readonly InputAction m_Player_Help;
+    private readonly InputAction m_Player_Ammo;
+    private readonly InputAction m_Player_Rush;
     public struct PlayerActions
     {
         private @PlayerAction m_Wrapper;
@@ -978,6 +1052,9 @@ public class @PlayerAction : IInputActionCollection, IDisposable
         public InputAction @Build => m_Wrapper.m_Player_Build;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Menu => m_Wrapper.m_Player_Menu;
+        public InputAction @Help => m_Wrapper.m_Player_Help;
+        public InputAction @Ammo => m_Wrapper.m_Player_Ammo;
+        public InputAction @Rush => m_Wrapper.m_Player_Rush;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1005,6 +1082,15 @@ public class @PlayerAction : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMenu;
+                @Help.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHelp;
+                @Help.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHelp;
+                @Help.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHelp;
+                @Ammo.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAmmo;
+                @Ammo.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAmmo;
+                @Ammo.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAmmo;
+                @Rush.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRush;
+                @Rush.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRush;
+                @Rush.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRush;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -1027,6 +1113,15 @@ public class @PlayerAction : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @Help.started += instance.OnHelp;
+                @Help.performed += instance.OnHelp;
+                @Help.canceled += instance.OnHelp;
+                @Ammo.started += instance.OnAmmo;
+                @Ammo.performed += instance.OnAmmo;
+                @Ammo.canceled += instance.OnAmmo;
+                @Rush.started += instance.OnRush;
+                @Rush.performed += instance.OnRush;
+                @Rush.canceled += instance.OnRush;
             }
         }
     }
@@ -1189,6 +1284,9 @@ public class @PlayerAction : IInputActionCollection, IDisposable
         void OnBuild(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnHelp(InputAction.CallbackContext context);
+        void OnAmmo(InputAction.CallbackContext context);
+        void OnRush(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
