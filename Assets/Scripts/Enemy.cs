@@ -178,7 +178,7 @@ public class Enemy : MonoBehaviour
         //}
 
         var item = Instantiate(dropItem, transform.position, dropItem.transform.rotation);
-        item.transform.position = new Vector3(item.transform.position.x, 1, item.transform.position.z);
+        item.transform.position = new Vector3(item.transform.position.x, item.transform.position.y + 1.0f, item.transform.position.z);
     }
 
     public void Attack()
