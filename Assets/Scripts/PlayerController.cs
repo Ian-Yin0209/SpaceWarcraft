@@ -63,6 +63,9 @@ public class PlayerController : MonoBehaviour
     public int ammo;
     public int maxAmmo;
 
+    // Sounds
+    SoundManager soundManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -77,6 +80,7 @@ public class PlayerController : MonoBehaviour
         keyboard = InputSystem.GetDevice<Keyboard>();
 
         characterController = GetComponent<CharacterController>();
+        soundManager = FindObjectOfType<SoundManager>();
         playerHealth = GetComponent<PlayerHealth>();
         scoreText = FindObjectOfType<ScoreText>();
         buildBarIns = Instantiate(buildBar);
@@ -251,7 +255,8 @@ public class PlayerController : MonoBehaviour
     private void BulletGenerate(bool firstShoot=false)
     {
         Instantiate(bullet, bulletSpawnPoint.transform.position + bulletSpawnPoint.transform.forward * 2, transform.rotation);
-        
+        soundManager.PlaySound("player_shoot");
+
         if (!firstShoot)
         {
             _rotation += new Vector2(Random.Range(-0.5f, -0.3f), Random.Range(-0.5f, 0.3f));
