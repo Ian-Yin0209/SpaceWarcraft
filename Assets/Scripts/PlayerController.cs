@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     GameObject buildBarIns = null;
     public GunTurret buildingGunTurret = null;
     public bool firePressed = false;
+    public bool helpPressed = false;
+    public bool rushPressed = false;
     private int fireCooldown = 0; 
     [SerializeField] private int fireCooldownMax = 15;
 
@@ -142,7 +144,7 @@ public class PlayerController : MonoBehaviour
         ScoreText.setStaminaText(GetComponent<PlayerHealth>().GetPlayerStamina());
         ScoreText.setAmmoText(ammo);
 
-        if (keyboard.hKey.isPressed)
+        if (helpPressed)
         {
             scoreText.helpText.gameObject.SetActive(true);
             Time.timeScale = 0;
@@ -169,7 +171,7 @@ public class PlayerController : MonoBehaviour
             downForce.y = Mathf.Sqrt(jumpHeight * -2 * gravity);
         }
 
-        if (keyboard.leftShiftKey.IsPressed() && playerHealth.GetPlayerStamina() > 0 && playerHealth.canRun)
+        if (rushPressed && playerHealth.GetPlayerStamina() > 0 && playerHealth.canRun)
         {
             speed = runSpeed;
             if (mov_val.magnitude > 0)
@@ -202,13 +204,21 @@ public class PlayerController : MonoBehaviour
             ammo = maxAmmo;
         }
 
-        if (keyboard.rKey.isPressed && (ammo - maxAmmo) <= 0) 
+        // if (keyboard.rKey.isPressed && (ammo - maxAmmo) <= 0) 
+        // {
+        //     if (resource > 100)
+        //     {
+        //         ammo++;
+        //         resource -= 100;
+        //     }
+        // }
+    }
+
+    public void purchaseAmmo() {
+        if (ammo < maxAmmo && resource >= 1000) 
         {
-            if (resource > 100)
-            {
-                ammo++;
-                resource -= 100;
-            }
+            ammo+=30;
+            resource -= 1000;
         }
     }
 
@@ -254,9 +264,11 @@ public class PlayerController : MonoBehaviour
 
     private void BulletGenerate(bool firstShoot=false)
     {
-        Instantiate(bullet, bulletSpawnPoint.transform.position + bulletSpawnPoint.transform.forward * 2, transform.rotation);
+        GameObject newBullet = Instantiate(bullet, bulletSpawnPoint.transform.position + bulletSpawnPoint.transform.forward * 2, transform.rotation);
         soundManager.PlaySound("player_shoot");
-
+        if (rushPressed) { // make bullet faster while running
+            newBullet.GetComponent<Rigidbody>().AddForce(newBullet.transform.forward * 30, ForceMode.Impulse);
+        }
         if (!firstShoot)
         {
             _rotation += new Vector2(Random.Range(-0.5f, -0.3f), Random.Range(-0.5f, 0.3f));
@@ -334,7 +346,7 @@ public class PlayerController : MonoBehaviour
         if (buildingGunTurret != null && resource > 0 && !buildingGunTurret.isFinished())
         {
             resource -= 1;
-            buildingGunTurret.build(0.2f * Time.fixedDeltaTime);
+            buildingGunTurret.build(0.6f * Time.fixedDeltaTime);
             buildBarIns.transform.position = transform.position * 0.25f + buildingGunTurret.transform.position * 0.75f;
             buildBarIns.transform.LookAt(buildingGunTurret.transform.position);
             buildBarIns.GetComponent<BuildProcessBar>().setValue(buildingGunTurret.buildingProgress);

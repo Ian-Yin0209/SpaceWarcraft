@@ -13,9 +13,11 @@ public class GunTurret : MonoBehaviour
     // New - Tower health
     [SerializeField] int turretHealth;
 
+    SoundManager soundManager;
     // Start is called before the first frame update
     void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
         line = gameObject.AddComponent<LineRenderer>();
         line.positionCount = 2;
         line.enabled = false;
@@ -28,7 +30,7 @@ public class GunTurret : MonoBehaviour
     void RefreshLine()
     {
         line.SetPosition(0, transform.position);
-        line.SetPosition(1, transform.position + transform.forward * 5);
+        line.SetPosition(1, transform.position + transform.forward * 10);
         line.enabled = true;
     }
 
@@ -73,10 +75,10 @@ public class GunTurret : MonoBehaviour
         {
             line.material.color = Color.green;
             //transform.RotateAround(transform.up, 1f * Time.fixedDeltaTime);
-            transform.Rotate(transform.up * 60f * Time.fixedDeltaTime);
+            transform.Rotate(transform.up * 80f * Time.fixedDeltaTime);
             RaycastHit hit;
             Physics.Raycast(transform.position, transform.forward, out hit);
-            if ((hit.distance > -1 && hit.distance < 10) && hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
+            if ((hit.distance > -1 && hit.distance < 15) && hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
             {
                 lockedEnemy = hit.collider.gameObject;
                 Debug.Log("Lock: " + hit.collider.gameObject + ": " + hit.distance);
@@ -90,6 +92,7 @@ public class GunTurret : MonoBehaviour
             transform.LookAt(pos);
             if (coolDown == 0)
             {
+                soundManager.PlaySound("player_shoot");
                 Instantiate(bullet, transform.position + transform.forward * 2, transform.rotation);
                 coolDown = 20;
             }
