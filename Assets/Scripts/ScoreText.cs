@@ -21,8 +21,7 @@ public class ScoreText : MonoBehaviour
     public Text ammoText;
     static Text ammoTextIns;
 
-    public Text helpText;
-
+    public GameObject helpText;
 
     private void Awake()
     {
