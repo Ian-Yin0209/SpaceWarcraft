@@ -8931,6 +8931,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 997a43b767814dd0a7642ec9b78cba41, type: 3}
+    - target: {fileID: 549468482, guid: decc3ebad1853f447b36fb6be2d40a80, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 555229746, guid: decc3ebad1853f447b36fb6be2d40a80, type: 3}
       propertyPath: m_Color.b
       value: 0
@@ -10066,9 +10070,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 110801ac708546c4a82afa12bfa8f33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 300
-  stamina: 9999999
-  maxStamina: 9999999
+  health: 500
+  stamina: 1000
+  maxStamina: 1000
   canRun: 0
 --- !u!143 &310428120
 CharacterController:
