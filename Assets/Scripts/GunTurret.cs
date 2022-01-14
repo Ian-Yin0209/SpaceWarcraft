@@ -78,7 +78,7 @@ public class GunTurret : MonoBehaviour
             transform.Rotate(transform.up * 80f * Time.fixedDeltaTime);
             RaycastHit hit;
             Physics.Raycast(transform.position, transform.forward, out hit);
-            if ((hit.distance > -1 && hit.distance < 15) && hit.collider != null && hit.collider.gameObject.CompareTag("Enemy"))
+            if ((hit.distance > -1 && hit.distance < 15) && hit.collider != null && (hit.collider.gameObject.CompareTag("Enemy") || hit.collider.gameObject.CompareTag("EnemyBody")))
             {
                 lockedEnemy = hit.collider.gameObject;
                 Debug.Log("Lock: " + hit.collider.gameObject + ": " + hit.distance);
