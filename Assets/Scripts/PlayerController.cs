@@ -381,6 +381,8 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("zone_1_start")) 
         {
+            SoundManager.instance.PlaySound("bg_area_1");
+            SoundManager.instance.StopSound("bg_base");
             GameManager.instance.inZone1 = true;
             GameManager.instance.inZone2 = false;
             GameManager.instance.inZone3 = false;
@@ -390,6 +392,8 @@ public class PlayerController : MonoBehaviour
 
         else if (other.gameObject.CompareTag("zone_2_start"))
         {
+            SoundManager.instance.PlaySound("bg_area_2");
+            SoundManager.instance.StopSound("bg_area_1");
             GameManager.instance.inZone1 = false;
             GameManager.instance.inZone2 = true;
             GameManager.instance.inZone3 = false;
@@ -398,6 +402,8 @@ public class PlayerController : MonoBehaviour
 
         else if (other.gameObject.CompareTag("zone_3_start"))
         {
+            SoundManager.instance.PlaySound("bg_area_3");
+            SoundManager.instance.StopSound("bg_area_2");
             GameManager.instance.inZone1 = false;
             GameManager.instance.inZone2 = false;
             GameManager.instance.inZone3 = true;
@@ -406,6 +412,8 @@ public class PlayerController : MonoBehaviour
 
         else if (other.gameObject.CompareTag("zone_4_start"))
         {
+            SoundManager.instance.PlaySound("bg_area_4");
+            SoundManager.instance.StopSound("bg_area_3");
             GameManager.instance.inZone1 = false;
             GameManager.instance.inZone2 = false;
             GameManager.instance.inZone3 = false;
