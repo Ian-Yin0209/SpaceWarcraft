@@ -14,13 +14,13 @@
 11. COLLECT THE 5 YELLOW COLOR PARTS INSIDE THE BEAMS SPREAD ACROSS THE TERRAIN TO FINISH THE GAME
 
 ## ASSETS USED
-TURRETS - https://assetstore.unity.com/packages/3d/props/weapons/turrets-pack-9872
-Materials and textures -
+1.TURRETS - https://assetstore.unity.com/packages/3d/props/weapons/turrets-pack-9872
+2.Materials and textures -
 https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-textures-204742
 https://assetstore.unity.com/packages/2d/textures-materials/lowpoly-textures-pack-140717 
 https://assetstore.unity.com/packages/tools/particles-effects/lowpoly-water-107563
-BASE - https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-styled-modular-pack-82913
-TREES - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742
+3.BASE - https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-styled-modular-pack-82913
+4.TREES - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742
 
 ## CODE REFERENCES
 Sound manager code referenced from - https://www.youtube.com/watch?v=6OT43pvUyfY
