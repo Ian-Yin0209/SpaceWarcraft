@@ -15,11 +15,14 @@
 
 ## ASSETS USED
 1.TURRETS - https://assetstore.unity.com/packages/3d/props/weapons/turrets-pack-9872
-2.Materials and textures -
-https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-textures-204742
-https://assetstore.unity.com/packages/2d/textures-materials/lowpoly-textures-pack-140717 
-https://assetstore.unity.com/packages/tools/particles-effects/lowpoly-water-107563
+
+2.Materials and textures
+- https://assetstore.unity.com/packages/2d/textures-materials/free-stylized-textures-204742
+- https://assetstore.unity.com/packages/2d/textures-materials/lowpoly-textures-pack-140717 
+- https://assetstore.unity.com/packages/tools/particles-effects/lowpoly-water-107563
+
 3.BASE - https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-styled-modular-pack-82913
+
 4.TREES - https://assetstore.unity.com/packages/3d/environments/landscapes/free-low-poly-nature-forest-205742
 
 ## CODE REFERENCES
