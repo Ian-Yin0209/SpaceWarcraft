@@ -20043,7 +20043,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111202, guid: 69b3d20c177508d43a1c6f09b448d3ea, type: 3}
       propertyPath: m_TagString
-      value: Walls
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 111202, guid: 69b3d20c177508d43a1c6f09b448d3ea, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -44604,7 +44604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 175324, guid: 4e32615977c0a9f4688fa0d66b0a93e5, type: 3}
       propertyPath: m_TagString
-      value: Walls
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 175324, guid: 4e32615977c0a9f4688fa0d66b0a93e5, type: 3}
       propertyPath: m_StaticEditorFlags
