@@ -46,4 +46,6 @@ MonoBehaviour:
   HUD: {fileID: 0}
   mainMenu: {fileID: 0}
   UICAM: {fileID: 0}
+  gameOverCam: {fileID: 0}
+  loseText: {fileID: 0}
   player: {fileID: 0}

@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public GameObject HUD;
     public GameObject mainMenu;
     public GameObject UICAM;
+    public GameObject gameOverCam;
+    public GameObject loseText;
 
     // PLayer
     public GameObject player;
@@ -43,7 +45,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void LoadLevel(string levelName)
