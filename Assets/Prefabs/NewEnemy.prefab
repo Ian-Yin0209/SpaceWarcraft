@@ -290,14 +290,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc43fb42bb398ce4a8cdde8c729275f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   dropItem: {fileID: 1637308654392179553, guid: 603b7872de2f19d45a410c5ef0de833d, type: 3}
   agent: {fileID: 7375445016396520307}
-  isPlayerInRadius: 0
-  isGunTurretInRadius: 0
-  provoked: 0
   enemyBullet: {fileID: 3864707384516103563, guid: f31d21a0c6bab97439b314e318609c67, type: 3}
   bulletPoint: {fileID: 7375445015059726516}
   gunTurret: {fileID: 7788935553831189646, guid: 75d7e773e0a25ec419865e831e207bf9, type: 3}
+  maxHealth: 2
+  meleeAttack: 0
+  meleeCooldown: 0
 --- !u!195 &7375445016396520307
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -111,6 +111,6 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: bg_menu
     audioClip: {fileID: 8300000, guid: 5cb24cc441a6a7046b01be5ed505e1e9, type: 3}
-    volume: 0.05
+    volume: 0.1
     loop: 1
     source: {fileID: 0}

@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         health = maxHealth;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameManager.instance.player;
     }
 
     // Update is called once per frame

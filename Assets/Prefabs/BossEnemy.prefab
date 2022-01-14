@@ -344,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc43fb42bb398ce4a8cdde8c729275f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 7389937169472120437, guid: cb2a7b2d0e21ed347ba52d03e7686186, type: 3}
   dropItem: {fileID: 1637308654392179553, guid: 603b7872de2f19d45a410c5ef0de833d, type: 3}
   agent: {fileID: 7375445016396520307}
   enemyBullet: {fileID: 3864707384516103563, guid: f31d21a0c6bab97439b314e318609c67, type: 3}

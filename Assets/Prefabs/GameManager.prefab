@@ -43,3 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e648e6eeacea2342a9c543ebf52e412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HUD: {fileID: 0}
+  mainMenu: {fileID: 0}
+  UICAM: {fileID: 0}
+  player: {fileID: 0}

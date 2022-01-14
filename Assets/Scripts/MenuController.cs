@@ -32,6 +32,6 @@ public class MenuController : MonoBehaviour
     public void OnClickRestart()
     {
         OnClickContinue();
-        SceneManager.LoadScene("SampleScene");
+        //SceneManager.LoadScene("Main");
     }
 }
